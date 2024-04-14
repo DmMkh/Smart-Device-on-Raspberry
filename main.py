@@ -26,10 +26,16 @@ import time
 from PIL import Image
 f = open('data.txt', 'r')
 
+#connecting to LCD-display
+
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(24, GPIO.OUT)
 
-i = 1
+
+#i = 1
+
+#reading numbers of diplay in file
+#and switching LCD on
 
 for line in f:
     print(line)
@@ -42,7 +48,7 @@ for line in f:
 f.close()
 GPIO.cleanup()
 def main(args):
-    print("sup")
+#    print("sup")
     return 0
 
 if __name__ == '__main__':
