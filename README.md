@@ -1,2 +1,2 @@
 # Smart-Device-on-Raspberry
-programming Raspberry Pi for MIPT project
+A device for displaying orders from the server
