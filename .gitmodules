@@ -1,0 +1,3 @@
+[submodule "Smart-Cart-server"]
+	path = server
+	url = https://github.com/Gugush284/Smart-Cart.git
