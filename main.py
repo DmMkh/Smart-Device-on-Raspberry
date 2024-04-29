@@ -26,29 +26,70 @@ import time
 from PIL import Image
 f = open('data.txt', 'r')
 
-#connecting to LCD-display
-
 GPIO.setmode(GPIO.BCM)
+
 GPIO.setup(24, GPIO.OUT)
+GPIO.setup(23, GPIO.OUT)
+GPIO.setup(25, GPIO.OUT)
+GPIO.setup(22, GPIO.OUT)
+GPIO.setup(27, GPIO.IN)
+GPIO.setup(17, GPIO.OUT)
 
-
-#i = 1
-
-#reading numbers of diplay in file
-#and switching LCD on
+def Buzz(pitch, duraction):
+    period = 1.0 / pitch
+    delay = period / 2
+    cycles = int(duraction * pitch)
+    for i in range(cycles):
+        GPIO.output(17, GPIO.HIGH)
+        time.sleep(delay)
+        GPIO.output(17, GPIO.LOW)
+        time.sleep(delay)
+i = 1
+j = 1
+k = 1
+l = 1
 
 for line in f:
     print(line)
+    while(j == 1):
+        if (GPIO.input(27) == 0 and k  != 2):
+            #print("hap")
+            k = 2
+            #GPIO.output(17, GPIO.HIGH)
+            #time.sleep(0.5)
+            Buzz(3000, 0.1)
+            #GPIO.output(17, GPIO.LOW)
+        if (k == 2 and GPIO.input(27) == 1):
+            #print("hop")
+            j = 2
+    j = 1
+    k = 1
     if (line[0] == '1'):
-        GPIO.output(24, GPIO.HIGH)
-    else:
+        GPIO.output(22, GPIO.HIGH)
+        GPIO.output(23, GPIO.LOW)
         GPIO.output(24, GPIO.LOW)
-    time.sleep(0.5)
-
+        GPIO.output(25, GPIO.LOW)
+    if (line[0] == '2'):
+        GPIO.output(22, GPIO.LOW)
+        GPIO.output(23, GPIO.HIGH)
+        GPIO.output(24, GPIO.LOW)
+        GPIO.output(25, GPIO.LOW)
+    if (line[0] == '3'):
+        GPIO.output(22, GPIO.LOW)
+        GPIO.output(23, GPIO.LOW)
+        GPIO.output(24, GPIO.HIGH)
+        GPIO.output(25, GPIO.LOW)
+    if (line[0] == '4'):
+        GPIO.output(22, GPIO.LOW)
+        GPIO.output(23, GPIO.LOW)
+        GPIO.output(24, GPIO.LOW)
+        GPIO.output(25, GPIO.HIGH)
+    time.sleep(1)
+time.sleep(3)
 f.close()
 GPIO.cleanup()
 def main(args):
-#    print("sup")
+    print("sup")
     return 0
 
 if __name__ == '__main__':
