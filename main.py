@@ -48,9 +48,24 @@ i = 1
 j = 1
 k = 1
 l = 1
+count = 0
 
 for line in f:
+    count = count + 1
     print(line)
+    if (count == 1):
+        image = Image.open('1.jpg')
+    if (count == 2):
+        image = Image.open('2.jpg')
+    if (count == 3):
+        image = Image.open('3.jpg')
+    if (count == 4):
+        image = Image.open('4.jpg')
+    if (count == 5):
+        image = Image.open('5.jpg')
+    if (count == 6):
+        image = Image.open('6.jpg')
+    image.show()
     while(j == 1):
         if (GPIO.input(27) == 0 and k  != 2):
             #print("hap")
@@ -64,20 +79,21 @@ for line in f:
             j = 2
     j = 1
     k = 1
+    image.close()
     if (line[0] == '1'):
-        GPIO.output(22, GPIO.HIGH)
-        GPIO.output(23, GPIO.LOW)
-        GPIO.output(24, GPIO.LOW)
-        GPIO.output(25, GPIO.LOW)
-    if (line[0] == '2'):
         GPIO.output(22, GPIO.LOW)
         GPIO.output(23, GPIO.HIGH)
         GPIO.output(24, GPIO.LOW)
         GPIO.output(25, GPIO.LOW)
-    if (line[0] == '3'):
+    if (line[0] == '2'):
         GPIO.output(22, GPIO.LOW)
         GPIO.output(23, GPIO.LOW)
         GPIO.output(24, GPIO.HIGH)
+        GPIO.output(25, GPIO.LOW)
+    if (line[0] == '3'):
+        GPIO.output(22, GPIO.HIGH)
+        GPIO.output(23, GPIO.LOW)
+        GPIO.output(24, GPIO.LOW)
         GPIO.output(25, GPIO.LOW)
     if (line[0] == '4'):
         GPIO.output(22, GPIO.LOW)
