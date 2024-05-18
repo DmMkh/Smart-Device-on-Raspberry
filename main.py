@@ -59,7 +59,7 @@ if users != None:
         for line in order:
             print(line)
 
-            for i in range(1, line[2]):
+            for i in range(1, line[2] + 1):
                 if (line[1] == 1):
                     image = Image.open('1.jpg')
                 if (line[1] == 2):
