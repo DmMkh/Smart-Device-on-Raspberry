@@ -114,8 +114,6 @@ def main(args):
             delete(user)
 
             time.sleep(3)
-
-        GPIO.cleanup()
     
 
 if __name__ == '__main__':
