@@ -24,6 +24,7 @@
 import RPi.GPIO as GPIO
 import time
 from PIL import Image
+import subprocess
 from client import getUsers, getCart, delete
 
 def Buzz(pitch, duraction):
@@ -37,6 +38,7 @@ def Buzz(pitch, duraction):
         time.sleep(delay)
 
 def main(args):
+    GPIO.cleanup()
     GPIO.setmode(GPIO.BCM)
 
     GPIO.setup(24, GPIO.OUT)
@@ -46,6 +48,10 @@ def main(args):
     GPIO.setup(27, GPIO.IN)
     GPIO.setup(17, GPIO.OUT)
     
+    GPIO.output(22, GPIO.LOW)
+    GPIO.output(23, GPIO.LOW)
+    GPIO.output(24, GPIO.LOW)
+    GPIO.output(25, GPIO.LOW)
     while(1):
         users = getUsers()
 
@@ -63,26 +69,26 @@ def main(args):
 
                     for i in range(1, line[2] + 1):
                         if (line[1] == 1):
-                            image = Image.open('1.jpg')
+                            p = subprocess.Popen(["display", "1.jpg"])
                         if (line[1] == 2):
-                            image = Image.open('2.jpg')
+                            p = subprocess.Popen(["display", "2.jpg"])
                         if (line[1] == 3):
-                            image = Image.open('3.jpg')
+                            p = subprocess.Popen(["display", "3.jpg"])
                         if (line[1] == 4):
-                            image = Image.open('4.jpg')
+                            p = subprocess.Popen(["display", "4.jpg"])
                         if (line[1] == 5):
-                            image = Image.open('5.jpg')
+                            p = subprocess.Popen(["display", "5.jpg"])
                         if (line[1] == 6):
-                            image = Image.open('6.jpg')
+                            p = subprocess.Popen(["display", "6.jpg"])
                         if (line[1] == 7):
-                            image = Image.open('7.jpg')
+                            p = subprocess.Popen(["display", "7.jpg"])
                         if (line[1] == 8):
-                            image = Image.open('8.jpg')
+                            p = subprocess.Popen(["display", "8.jpg"])
                         if (line[1] == 9):
-                            image = Image.open('9.jpg')
+                            p = subprocess.Popen(["display", "9.jpg"])
                         if (line[1] == 10):
-                            image = Image.open('10.jpg')                
-                        image.show()
+                            p = subprocess.Popen(["display", "10.jpg"])                
+                        #image.show()
                         while(j == 1):
                             if (GPIO.input(27) == 0 and k  != 2):
                                 #print("hap")
@@ -96,31 +102,32 @@ def main(args):
                                 j = 2
                         j = 1
                         k = 1
-                        image.close()
-                        if (line[0] == '1'):
-                            GPIO.output(22, GPIO.HIGH)
-                            GPIO.output(23, GPIO.LOW)
-                            GPIO.output(24, GPIO.LOW)
-                            GPIO.output(25, GPIO.LOW)
-                        if (line[0] == '2'):
-                            GPIO.output(22, GPIO.LOW)
-                            GPIO.output(23, GPIO.LOW)
-                            GPIO.output(24, GPIO.LOW)
-                            GPIO.output(25, GPIO.HIGH)
-                        if (line[0] == '3'):
-                            GPIO.output(22, GPIO.LOW)
-                            GPIO.output(23, GPIO.HIGH)
-                            GPIO.output(24, GPIO.LOW)
-                            GPIO.output(25, GPIO.LOW)
-                        if (line[0] == '4'):
+                        #image.close()
+                        p.kill()
+                        if (line[0] == 1):
                             GPIO.output(22, GPIO.LOW)
                             GPIO.output(23, GPIO.LOW)
                             GPIO.output(24, GPIO.HIGH)
                             GPIO.output(25, GPIO.LOW)
-                    time.sleep(1)
+                        if (line[0] == 2):
+                            GPIO.output(22, GPIO.LOW)
+                            GPIO.output(23, GPIO.HIGH)
+                            GPIO.output(24, GPIO.LOW)
+                            GPIO.output(25, GPIO.LOW)
+                        if (line[0] == 3):
+                            GPIO.output(22, GPIO.HIGH)
+                            GPIO.output(23, GPIO.LOW)
+                            GPIO.output(24, GPIO.LOW)
+                            GPIO.output(25, GPIO.LOW)
+                        if (line[0] == 4):
+                            GPIO.output(22, GPIO.LOW)
+                            GPIO.output(23, GPIO.LOW)
+                            GPIO.output(24, GPIO.LOW)
+                            GPIO.output(25, GPIO.HIGH)
+                    time.sleep(0.3)
 
             delete(user)
-
+            print("Order is completed")
             time.sleep(3)
     
 
