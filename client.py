@@ -12,7 +12,7 @@ def getCart(user: int):
     return response.json()
 
 def delete(user: int):
-    response = requests.get(addr + '/del/' + str(user))
+    response = requests.post(addr + '/del/' + str(user))
 
     return response.json()  
 
