@@ -1,5 +1,5 @@
 ## Smart cart
-Smart cart is a device for speeding up the assembly of orders. It consists of three parts: server, ordering application (TG bot for demonstration) and cart application.
+Smart cart is a device for speeding up the assembly of orders. Read more [here](https://github.com/Gugush284/Smart-Cart/tree/main).
 
 In this repository you can find demonstration code for device displaying orders from the server
 
