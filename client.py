@@ -9,7 +9,12 @@ def getUsers():
 def getCart(user: int):
     response = requests.get(addr + '/ready/' + str(user))
 
-    return response.json() 
+    return response.json()
+
+def delete(user: int):
+    response = requests.get(addr + '/del/' + str(user))
+
+    return response.json()  
 
 if __name__ == "__main__":
     users = getUsers()
