@@ -37,21 +37,21 @@ def Buzz(pitch, duraction):
         time.sleep(delay)
 
 def main(args):
+    GPIO.setmode(GPIO.BCM)
+
+    GPIO.setup(24, GPIO.OUT)
+    GPIO.setup(23, GPIO.OUT)
+    GPIO.setup(25, GPIO.OUT)
+    GPIO.setup(22, GPIO.OUT)
+    GPIO.setup(27, GPIO.IN)
+    GPIO.setup(17, GPIO.OUT)
+    
     while(1):
         users = getUsers()
 
         if users != None: 
             for user in users:
                 order = getCart(user)
-
-                GPIO.setmode(GPIO.BCM)
-
-                GPIO.setup(24, GPIO.OUT)
-                GPIO.setup(23, GPIO.OUT)
-                GPIO.setup(25, GPIO.OUT)
-                GPIO.setup(22, GPIO.OUT)
-                GPIO.setup(27, GPIO.IN)
-                GPIO.setup(17, GPIO.OUT)
 
                 i = 1
                 j = 1
